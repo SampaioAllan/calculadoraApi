@@ -4,17 +4,15 @@ namespace CalculadoraApi.Web.Controllers;
 
 [ApiController]
 [Route("[controller]")]
-
-
 public class CalculadoraController : ControllerBase
 {
-
     [HttpGet("Somar")]
     public IActionResult Soma(double valor1, double valor2)
     {
-        if (ValidacaoNumero(valor1) & ValidacaoNumero(valor2))
+        var calculadora = new Calculadora();
+        if (calculadora.ValidarNumero(valor1) & calculadora.ValidarNumero(valor2))
         {
-            return Ok(valor1 + valor2);
+            return Ok(calculadora.Somar(valor1, valor2));
         }
         return BadRequest("Um ou mais parâmetros são inválidos!");
     }
@@ -22,9 +20,10 @@ public class CalculadoraController : ControllerBase
     [HttpGet("Subtrair")]
     public IActionResult Subtracao(double valor1, double valor2)
     {
-        if (ValidacaoNumero(valor1) & ValidacaoNumero(valor2))
+        var calculadora = new Calculadora();
+        if (calculadora.ValidarNumero(valor1) & calculadora.ValidarNumero(valor2))
         {
-            return Ok(valor1 - valor2);
+            return Ok(new Calculadora().Substrair(valor1, valor2));
         }
         return BadRequest("Um ou mais parâmetros são inválidos!");
     }
@@ -32,9 +31,10 @@ public class CalculadoraController : ControllerBase
     [HttpGet("Dividir")]
     public IActionResult Divisao(double valor1, double valor2)
     {
-        if (ValidacaoNumero(valor1) & ValidacaoNumero(valor2) & valor1 > 0 & valor2 > 0)
+        var calculadora = new Calculadora();
+        if (calculadora.ValidarNumero(valor1) & calculadora.ValidarNumero(valor2) & valor1 > 0 & valor2 > 0)
         {
-            return Ok(valor1 / valor2);
+            return Ok(calculadora.Dividir(valor1, valor2));
         }
         return BadRequest("Um ou mais parâmetros são inválidos!");
     }
@@ -45,17 +45,8 @@ public class CalculadoraController : ControllerBase
     {
         if (valor1 < 1000 & valor2 < 1000 & valor1 !=0 &valor2 !=0 & valor1 > 0 & valor2 > 0)
         {
-            return Ok(valor1 * valor2);
+            return Ok(new Calculadora().Multiplicar(valor1, valor2));
         }
         return BadRequest("Um ou mais parâmetros são inválidos!");
     }
-
-    private bool ValidacaoNumero(double valor)
-    {
-        if (valor != 0 & valor < 1000)
-            return true;
-        return false;
-    }
-
-
 }
