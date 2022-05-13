@@ -20,4 +20,8 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\CalculadoraApi.Web\CalculadoraApi.Web.csproj" />
+  </ItemGroup>
+
 </Project>
