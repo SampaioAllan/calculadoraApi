@@ -18,7 +18,7 @@ namespace CalculadoraApi.Test
         {
             var calc = new Calculadora();
             var esperado = 0;
-            var resultado = calc.Substrair(2, 2);
+            var resultado = calc.Subtrair(2, 2);
             Assert.Equal(esperado, resultado);
         }
         [Fact]
